@@ -2,3 +2,9 @@
     background-color: #222222;
     border-radius: 3px;
 }
+
+.blank:hover {
+    background-color: #BBBBBB;
+    cursor: none;
+    text-decoration-line: 1px;
+}
