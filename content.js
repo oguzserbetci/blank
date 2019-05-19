@@ -1,4 +1,5 @@
 var determiners = ['d[ei][rmnse]', 'ein[e]*[nsmr]*']
+var types = ['bestimmt', 'unbestimmt']
 
 var paragraphs = document.getElementById('mw-content-text').getElementsByTagName("p")
 for (var i = 0, l = paragraphs.length; i < l; i++) {
@@ -7,6 +8,6 @@ for (var i = 0, l = paragraphs.length; i < l; i++) {
     var myExp = new RegExp(reg_str, 'im')
     found = paragraphs[i].innerHTML.match(myExp)
     if (found != null) {
-        paragraphs[i].innerHTML = paragraphs[i].innerHTML.replace(myExp, "\1<span class='blank'> " + found[2] + " </span>\3")
+        paragraphs[i].innerHTML = paragraphs[i].innerHTML.replace(myExp, "\1<span class='"+types[random_ind]+" blank'> " + found[2] + " </span>\3")
     }
 }
