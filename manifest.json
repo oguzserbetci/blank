@@ -6,6 +6,6 @@
   "content_scripts": [{
     "css": ["styles.css"],
     "js": ["content.js"],
-    "matches": ["*://*.de/*"]
+    "matches": ["*://*.de/*","*://de.wikipedia.org/*"]
   }]
 }
