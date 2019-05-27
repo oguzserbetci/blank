@@ -1,13 +1,10 @@
-var determiners = ['d[ei][rmnse]', 'ein[e]*[nsmr]*']
+var determiners = ['(d[ei][rmnse])', '(ein[e]*[nsmr]*)']
 var types = ['bestimmt', 'unbestimmt']
 
-var paragraphs = document.getElementById('mw-content-text').getElementsByTagName("p")
+var paragraphs = document.getElementsByTagName("p")
 for (var i = 0, l = paragraphs.length; i < l; i++) {
     var random_ind = Math.floor(Math.random() * determiners.length)
-    var reg_str = '(\\s)(' + determiners[random_ind] + ')(\\s)'
+    var reg_str = '\\b' + determiners[random_ind] + '\\b'
     var myExp = new RegExp(reg_str, 'im')
-    found = paragraphs[i].innerHTML.match(myExp)
-    if (found != null) {
-        paragraphs[i].innerHTML = paragraphs[i].innerHTML.replace(myExp, "\1<span class='"+types[random_ind]+" blank'> " + found[2] + " </span>\3")
-    }
+    paragraphs[i].innerHTML = paragraphs[i].innerHTML.replace(myExp, "<span class='" + types[random_ind] + " blank'>$1</span>")
 }
