@@ -20,6 +20,15 @@
     background-color: #ffe6e6;
 }
 
+.preposition {
+    background-color: #ff66ff;
+    color: #ff66ff;
+}
+
+.preposition:hover {
+    background-color: #ffe6ff;
+}
+
 .blank:hover {
     cursor: none;
     color: #222222;
