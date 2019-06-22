@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Options for blank.</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Editable table -->
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
+            <div class="card-body">
+                <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i
+                        class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Regex</th>
+                        <th class="text-center">Color Hex</th>
+                        <th class="text-center">Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="pt-3-half" contenteditable="true">Aurelia Vega</td>
+                        <td class="pt-3-half" contenteditable="true">30</td>
+                        <td>
+                        <span class="table-remove"><button type="button"
+                            class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                        </td>
+                    </tr>
+                    <!-- This is our clonable table line -->
+                    <tr>
+                        <td class="pt-3-half" contenteditable="true">Guerra Cortez</td>
+                        <td class="pt-3-half" contenteditable="true">45</td>
+                        <td>
+                        <span class="table-remove"><button type="button"
+                            class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                        </td>
+                    </tr>
+                    <!-- This is our clonable table line -->
+                    <tr>
+                        <td class="pt-3-half" contenteditable="true">Guadalupe House</td>
+                        <td class="pt-3-half" contenteditable="true">26</td>
+                        <td>
+                        <span class="table-remove"><button type="button"
+                            class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                        </td>
+                    </tr>
+                    <!-- This is our clonable table line -->
+                    <tr class="hide">
+                        <td class="pt-3-half" contenteditable="true">Elisa Gallagher</td>
+                        <td class="pt-3-half" contenteditable="true">31</td>
+                        <td>
+                        <span class="table-remove"><button type="button"
+                            class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        <!-- Editable table -->
+        <script src="options.js"></script>
+    </body>
+</html>
