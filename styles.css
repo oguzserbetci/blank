@@ -1,36 +1,13 @@
 .blank {
+    color: transparent;
     border-radius: 3px;
-}
-
-.bestimmt {
-    background-color: #66ff99;
-    color: #66ff99;
-}
-
-.bestimmt:hover {
-    background-color: #e6ffee;
-}
-
-.unbestimmt {
-    background-color: #ff6666;
-    color: #ff6666;
-}
-
-.unbestimmt:hover {
-    background-color: #ffe6e6;
-}
-
-.preposition {
-    background-color: #ff66ff;
-    color: #ff66ff;
-}
-
-.preposition:hover {
-    background-color: #ffe6ff;
+    display: inline-block;
+    text-align: center;
+    margin: 1px;
 }
 
 .blank:hover {
     cursor: none;
-    color: #222222;
+    color: inherit !important;
     text-decoration-line: 1px;
 }

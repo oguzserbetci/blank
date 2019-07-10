@@ -1,87 +1,64 @@
-const $tableID = $('#table');
-const $BTN = $('#export-btn');
-const $EXPORT = $('#export');
+function addRow(isActive, regex, color) {
+    var table = document.getElementById("table");
+    var row = createRow(isActive, regex, color);
+    var removeButton = document.createElement("button");
+    removeButton.innerText = "REMOVE";
+    removeButton.type = "button"
+    removeButton.className = "btn btn-danger"
+    removeButton.addEventListener("click", function() {
+        this.parentNode.parentNode.remove();
+    })
+    var col = document.createElement("td");
+    col.appendChild(removeButton)
+    row.appendChild(col);
+    table.appendChild(row);
 
-const newTr = `
-<tr class="hide">
-<td class="pt-3-half" contenteditable="true">Example</td>
-<td class="pt-3-half" contenteditable="true">Example</td>
-<td class="pt-3-half" contenteditable="true">Example</td>
-<td class="pt-3-half" contenteditable="true">Example</td>
-<td class="pt-3-half" contenteditable="true">Example</td>
-<td class="pt-3-half">
-    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-</td>
-<td>
-    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
-</td>
-</tr>`;
+    saveOptions()
+}
 
-$('.table-add').on('click', 'i', () => {
+function createRow(isActive, regex, color) {
+    var row = document.createElement("tr");
+    row.className = "browser-style"
+    row.innerHTML = "<td><input type=\"checkbox\" checked=\"" + isActive + "\"></td><td><input type=\"text\"  value=\"" + regex + "\"></td><td><input type=\"text\" value=\"" + color + "\"></td>"
+    return row
+}
 
-    const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+var newButton = document.getElementById("new-button");
+newButton.addEventListener("click", function() {
+    addRow(true, "", "")
+});
 
-    if ($tableID.find('tbody tr').length === 0) {
+function saveOptions() {
+    var options = []
 
-        $('tbody').append(newTr);
+    var rows = document.querySelectorAll("table > tr");
+    for (var i = 0, l = rows.length; i < l; i++) {
+        var inputs = rows[i].querySelectorAll("td > input")
+        if (inputs[0].getAttribute("checked")) {
+            option = {
+                "isActive": inputs[0].checked,
+                "rx": inputs[1].value,
+                "color": inputs[2].value
+            }
+            options.push(option)
+        }
     }
-
-    $tableID.find('table').append($clone);
-});
-
-$tableID.on('click', '.table-remove', function() {
-
-    $(this).parents('tr').detach();
-});
-
-$tableID.on('click', '.table-up', function() {
-
-    const $row = $(this).parents('tr');
-
-    if ($row.index() === 1) {
-        return;
-    }
-
-    $row.prev().before($row.get(0));
-});
-
-$tableID.on('click', '.table-down', function() {
-
-    const $row = $(this).parents('tr');
-    $row.next().after($row.get(0));
-});
-
-// A few jQuery helpers for exporting only
-jQuery.fn.pop = [].pop;
-jQuery.fn.shift = [].shift;
-
-$BTN.on('click', () => {
-
-    const $rows = $tableID.find('tr:not(:hidden)');
-    const headers = [];
-    const data = [];
-
-    // Get the headers (add special header logic here)
-    $($rows.shift()).find('th:not(:empty)').each(function() {
-
-        headers.push($(this).text().toLowerCase());
+    browser.storage.local.set({
+        "rxs": options,
     });
+}
 
-    // Turn all existing rows into a loopable array
-    $rows.each(function() {
-        const $td = $(this).find('td');
-        const h = {};
+var saveButton = document.getElementById("save-button");
+saveButton.addEventListener("click", saveOptions);
 
-        // Use the headers from earlier to name our hash keys
-        headers.forEach((header, i) => {
-
-            h[header] = $td.eq(i).text();
-        });
-
-        data.push(h);
+function restoreOptions() {
+    browser.storage.local.get("rxs").then(res => {
+        for (var i = 0, l = res["rxs"].length; i < l; i++) {
+            addRow(res["rxs"][i].isActive,
+                res["rxs"][i].rx,
+                res["rxs"][i].color)
+        }
     });
+}
 
-    // Output the result
-    $EXPORT.text(JSON.stringify(data));
-});
+document.addEventListener('DOMContentLoaded', restoreOptions);

@@ -1,12 +1,18 @@
 {
-  "manifest_version": 2,
-  "name": "blank",
-  "version": "0.0.1",
-  "description": "Creates exercises for your reading online!",
-  "options_page": "options.html",
-  "content_scripts": [{
-    "css": ["styles.css"],
-    "js": ["content.js"],
-    "matches": ["*://*.de/*","*://de.wikipedia.org/*"]
-  }]
+    "manifest_version": 2,
+    "name": "blank",
+    "version": "0.0.1",
+    "description": "Creates exercises for your reading online!",
+    "options_ui": {
+        "page": "options.html",
+        "browser_style": true
+    },
+    "content_scripts": [{
+        "css": ["styles.css"],
+        "js": ["content.js"],
+        "matches": ["*://*.de/*", "*://de.wikipedia.org/*"]
+    }],
+    "permissions": [
+        "storage"
+    ]
 }
