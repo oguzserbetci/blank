@@ -4,7 +4,7 @@ browser.storage.local.get("rxs").then(results => {
     var paragraphs = document.getElementsByTagName("p")
     for (var i = 0; i < paragraphs.length; i++) {
         var random_ind = Math.floor(Math.random() * rxs.length)
-        var rx_str = '\\b' + rxs[random_ind].rx + '\\b'
+        var rx_str = '\\b' + rxs[random_ind].rx + '(?=\\s|$)'
         var regex = new RegExp(rx_str, 'igm')
 
         const paragraph = paragraphs[i]
