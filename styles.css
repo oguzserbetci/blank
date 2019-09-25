@@ -11,3 +11,13 @@
     color: inherit !important;
     text-decoration-line: 1px;
 }
+
+.form-check {
+    margin: auto;
+    zoom: 1.5;
+    transform: scale(1.5);
+}
+
+.checkbox-cell {
+    vertical-align: middle !important;
+}
