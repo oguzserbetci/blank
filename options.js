@@ -19,7 +19,7 @@ function addRow(isActive, regex, color) {
 function createRow(isActive, regex, color) {
     var row = document.createElement("tr");
     row.className = "browser-style"
-    row.innerHTML = "<td><input type=\"checkbox\" checked=\"" + isActive + "\"></td><td><input type=\"text\"  value=\"" + regex + "\"></td><td><input type=\"text\" value=\"" + color + "\"></td>"
+    row.innerHTML = "<td><input type=\"checkbox\" checked=\"" + isActive + "\"></td><td><input type=\"text\" class=\"form-control\" value=\"" + regex + "\"></td><td><input type=\"text\" class=\"form-control\" value=\"" + color + "\"></td>"
     return row
 }
 
