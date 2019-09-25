@@ -28,6 +28,13 @@ newButton.addEventListener("click", function() {
     addRow(true, "", "")
 });
 
+var defaultButton = document.getElementById("defaults-button");
+defaultButton.addEventListener("click", function() {
+    addRow(true, '(d[ei][rmnse])', "#ffa502")
+    addRow(true, '(ein[e]*[nsmr]*)', "#eccc68")
+    addRow(true, '(beim?|a[nm]|auf|i[nm]|vo[nm]|über|zu[mr]?|nach|aus|durch|um)', "#ff7f50")
+});
+
 function saveOptions() {
     var options = []
 
