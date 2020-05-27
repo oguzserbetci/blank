@@ -18,5 +18,9 @@
     "permissions": [
         "storage",
         "tabs"
-    ]
+    ],
+    "browser_action": {
+        "default_icon":  "wink.png",
+        "default_title": "blank__"
+    }
 }
