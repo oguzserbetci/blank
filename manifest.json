@@ -12,7 +12,11 @@
         "js": ["content.js"],
         "matches": ["*://*.de/*", "*://de.wikipedia.org/*"]
     }],
+    "background": {
+        "scripts": ["background.js"]
+    },
     "permissions": [
-        "storage"
+        "storage",
+        "tabs"
     ]
 }
