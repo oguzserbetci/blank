@@ -10,7 +10,7 @@
     "content_scripts": [{
         "css": ["styles.css"],
         "js": ["content.js"],
-        "matches": ["*://*.de/*", "*://de.wikipedia.org/*"]
+        "matches": ["*://*/*"]
     }],
     "background": {
         "scripts": ["background.js"]
