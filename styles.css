@@ -1,5 +1,4 @@
 .sub {
-    pointer-events: auto;
     grid-column: 1;
     grid-row: 1;
     text-align: left;
@@ -10,7 +9,6 @@
 }
 
 .blank-container {
-    pointer-events: none;
     display: inline-grid;
     margin: 1px;
     border-radius: 3px;
@@ -18,7 +16,6 @@
 }
 
 .blank {
-    pointer-events: auto;
     color: transparent;
     text-align: center;
     grid-column: 1;
@@ -27,17 +24,21 @@
     min-width: 5em;
 }
 
-.blank.correct{
+.blank-container:hover .blank {
+    cursor: none;
     color: inherit !important;
 }
 
-.sub.correct {
+span.answered .blank {
+    color: inherit !important;
+}
+
+span.correct .sub {
     background-color: greenyellow !important;
 }
 
-.blank:hover {
-    cursor: none;
-    color: inherit !important;
+span.wrong .sub {
+    background-color: orangered !important;
 }
 
 .form-check {

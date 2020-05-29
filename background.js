@@ -8,8 +8,7 @@ browser.browserAction.onClicked.addListener(() => {
 function sendMessageToTabs(tabs) {
   for (let tab of tabs) {
     browser.tabs.sendMessage(
-    tab.id,
-    {greeting: "Hi from background script"}
+      tab.id, {}
     );
   }
 }
