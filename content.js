@@ -2,7 +2,7 @@ browser.runtime.onMessage.addListener(blankizePage);
 
 function blankizePage() {
     browser.storage.local.get("regexes").then(results => {
-        const regexes = results["regexes"]
+        const regexes = results["regexes"].filter(regex => regex.isActive)
         
         var paragraphs = document.getElementsByTagName("p")
         for (var i = 0; i < paragraphs.length; i++) {

@@ -18,10 +18,10 @@ function addRow(isActive, rxstr, substr, color) {
 
 function createRow(isActive, rxstr, substr, color) {
     var row = document.createElement("tr");
-    row.innerHTML = "<td class=\"checkbox-cell\"><input type=\"checkbox\" class=\"form-check\" checked=\"" + isActive + "\"></td> \
-                     <td><input type=\"text\" class=\"form-control\" value=\"" + rxstr + "\"></td> \
-                     <td><input type=\"text\" class=\"form-control\" value=\"" + substr + "\"></td> \
-                     <td><input type=\"text\" class=\"form-control\" value=\"" + color + "\"></td>" 
+    row.innerHTML = `<td class=\"checkbox-cell\"><input type=\"checkbox\" class=\"form-check\" ${ isActive ? 'checked' : '' }></td>
+                     <td><input type=\"text\" class=\"form-control\" value=\"${rxstr}\"></td>
+                     <td><input type=\"text\" class=\"form-control\" value=\"${substr}\"></td>
+                     <td><input type=\"text\" class=\"form-control\" value=\"${color}\"></td>`
     return row
 }
 
@@ -43,16 +43,14 @@ function saveOptions() {
     var rows = document.querySelectorAll("table > tr");
     for (var i = 0, l = rows.length; i < l; i++) {
         var inputs = rows[i].querySelectorAll("td > input")
-        if (inputs[0].getAttribute("checked")) {
-            option = {
-                "isActive": inputs[0].checked,
-                "rxstr": inputs[1].value,
-                "rx": new RegExp('\\b' + inputs[1].value + '(?=\\s|$)', 'igm'),
-                "substr": inputs[2].value,
-                "color": inputs[3].value
-            }
-            options.push(option)
+        option = {
+            "isActive": inputs[0].checked,
+            "rxstr": inputs[1].value,
+            "rx": new RegExp('\\b' + inputs[1].value + '(?=\\s|$)', 'igm'),
+            "substr": inputs[2].value,
+            "color": inputs[3].value
         }
+        options.push(option)
     }
     browser.storage.local.set({
         "regexes": options,
