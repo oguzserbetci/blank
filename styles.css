@@ -2,8 +2,8 @@
     grid-column: 1;
     grid-row: 1;
     text-align: left;
-    padding-left: 0.1em;
-    border-radius: 3px;
+    padding-left: 0.3em;
+    border-radius: 5px;
     color: whitesmoke;
     background-color: transparent;
 }
@@ -34,11 +34,11 @@ span.answered .blank {
 }
 
 span.correct .sub {
-    background-color: greenyellow !important;
+    background-color: #26de81 !important;
 }
 
 span.wrong .sub {
-    background-color: orangered !important;
+    background-color: #fc5c65 !important;
 }
 
 .form-check {
@@ -52,11 +52,14 @@ span.wrong .sub {
 }
 
 .score {
-    background-color: skyblue;
+    background-color: #fd9644;
     text-align: center;
+    text-weight: 500;
     padding: 0.5em;
+    background: #f27121; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top right, #8a2387, #e94057, #f27121); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top right, #8a2387, #e94057, #f27121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-
 .sticky {
     position: fixed;
     top: 0;
