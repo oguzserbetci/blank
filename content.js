@@ -20,12 +20,43 @@ function storeCorrect(event) {
             scores[elem.parentElement.children[0].textContent] = 1
             browser.storage.local.set({scores});
         }
-        
     })
+}
 
+browser.storage.onChanged.addListener( function () {
+    updateScoreHeader()
+})
+
+function updateScoreHeader() {
+    console.log('update')
+    const node = document.getElementById("blank_scoreHeader")
+    browser.storage.local.get("scores").then(results => {
+        var output = ''
+        for (var property in results["scores"]) {
+            console.log(property)
+            console.log(results["scores"][property])
+            output += property + ': ' + results["scores"][property]+'    ';
+        }
+        node.innerHTML = output + "🎉"
+    })
+}
+
+function insertScoreHeader() {
+    console.log('insert')
+    const node = document.createElement("div")
+    node.className = "score sticky"
+    node.id = "blank_scoreHeader"
+    document.body.appendChild(node)
 }
 
 function blankizePage() {
+    const node = document.getElementById("blank_scoreHeader")
+    console.log(node)
+    if (node == null) {
+        insertScoreHeader()
+    }
+    updateScoreHeader()
+
     browser.storage.local.get("regexes").then(results => {
         const regexes = results["regexes"].filter(regex => regex.isActive)
         
