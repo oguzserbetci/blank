@@ -1,22 +1,18 @@
 function editScore(scores, key, edit=1) {
     score = typeof scores[key] != 'undefined' ? scores[key] : 0
     scores[key] = score + edit
-    console.log(scores)
     return scores
 }
 
 function storeCorrect(event) {
     const elem = event.target.parentElement
 
-    const scoreKey = elem.children[0].textContent
+    const scoreKey = elem.children[1].className.match("substr=(.*?)(?=\\s|$)")[1]
     browser.storage.local.get("scores").then(res => {
         var scores = res["scores"]
-        console.log(res)
         if (res['scores'] == undefined) {
-            console.log('init')
             scores = {}
         }
-        console.log(scores, scoreKey)
 
         var edit = 0
         if (elem.className.includes("correct")) {
@@ -44,11 +40,12 @@ function updateScoreHeader() {
     }
 
     browser.storage.local.get("scores").then(results => {
-        var output = ''
+        scoreHeader.innerHTML = ""
         for (var property in results["scores"]) {
-            output += property + ': ' + results["scores"][property]+'    ';
+            const blank = buildBlank({'substr': property, 'color': 'red'}, results["scores"][property])
+            blank.className += " correct answered"
+            scoreHeader.appendChild(blank)
         }
-        scoreHeader.innerHTML = output + "🎉"
     })
 }
 browser.storage.onChanged.addListener(updateScoreHeader)
@@ -64,7 +61,7 @@ function buildBlank(regex, text) {
     container.appendChild(subNode)
 
     const blankNode = document.createElement("span")
-    blankNode.className = "blank"
+    blankNode.className = `blank substr=${regex.substr}`
     blankNode.textContent = text
     container.appendChild(blankNode)
     return container
