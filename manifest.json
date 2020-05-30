@@ -4,8 +4,7 @@
     "version": "0.0.1",
     "description": "Creates exercises for your reading online!",
     "options_ui": {
-        "page": "options.html",
-        "browser_style": true
+        "page": "options.html"
     },
     "content_scripts": [{
         "css": ["styles.css"],
