@@ -72,3 +72,43 @@ function restoreOptions() {
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
+document.addEventListener('DOMContentLoaded', updateScoreHeader);
+
+var resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", function(){browser.storage.local.set({"scores": {}})});
+
+function buildBlank(regex, text) {
+    const container = document.createElement("span")
+    container.className = "blank-container"
+
+    const subNode = document.createElement("span")
+    subNode.textContent = regex.substr
+    subNode.className = "sub"
+    subNode.style.cssText = "background-color:" + regex.color + ";"
+    container.appendChild(subNode)
+
+    const blankNode = document.createElement("span")
+    blankNode.className = `blank substr=${regex.substr}`
+    blankNode.textContent = text
+    container.appendChild(blankNode)
+    return container
+}
+function updateScoreHeader() {
+    var scoreHeader = document.getElementById("blank_scoreHeader")
+    if (scoreHeader == null) {
+        scoreHeader = document.createElement("div")
+        scoreHeader.className = "score sticky"
+        scoreHeader.id = "blank_scoreHeader"
+        document.body.appendChild(scoreHeader)
+    }
+
+    browser.storage.local.get("scores").then(results => {
+        scoreHeader.innerHTML = ""
+        for (var property in results["scores"]) {
+            const blank = buildBlank({'substr': property, 'color': 'red'}, results["scores"][property])
+            blank.className += " correct answered"
+            scoreHeader.appendChild(blank)
+        }
+    })
+}
+browser.storage.onChanged.addListener(updateScoreHeader)
