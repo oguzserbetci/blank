@@ -35,25 +35,42 @@ function storeCorrect(event) {
 }
 
 function updateScoreHeader() {
-    const node = document.getElementById("blank_scoreHeader")
+    var scoreHeader = document.getElementById("blank_scoreHeader")
+    if (scoreHeader == null) {
+        scoreHeader = document.createElement("div")
+        scoreHeader.className = "score sticky"
+        scoreHeader.id = "blank_scoreHeader"
+        document.body.appendChild(scoreHeader)
+    }
+
     browser.storage.local.get("scores").then(results => {
         var output = ''
         for (var property in results["scores"]) {
             output += property + ': ' + results["scores"][property]+'    ';
         }
-        node.innerHTML = output + "🎉"
+        scoreHeader.innerHTML = output + "🎉"
     })
 }
 browser.storage.onChanged.addListener(updateScoreHeader)
 
+function buildBlank(regex, text) {
+    const container = document.createElement("span")
+    container.className = "blank-container"
+
+    const subNode = document.createElement("span")
+    subNode.textContent = regex.substr
+    subNode.className = "sub"
+    subNode.style.cssText = "background-color:" + regex.color + ";"
+    container.appendChild(subNode)
+
+    const blankNode = document.createElement("span")
+    blankNode.className = "blank"
+    blankNode.textContent = text
+    container.appendChild(blankNode)
+    return container
+}
+
 function blankizePage() {
-    const scoreHeader = document.getElementById("blank_scoreHeader")
-    if (scoreHeader == null) {
-        const scoreHeader = document.createElement("div")
-        scoreHeader.className = "score sticky"
-        scoreHeader.id = "blank_scoreHeader"
-        document.body.appendChild(scoreHeader)
-    }
     updateScoreHeader()
 
     browser.storage.local.get("regexes").then(results => {
@@ -72,21 +89,9 @@ function blankizePage() {
                         node = node.splitText(match.index)
                         node.textContent = node.textContent.substring(match[1].length)
 
-                        const container = document.createElement("span")
-                        container.className = "blank-container"
-                        container.addEventListener("click", storeCorrect)
-                        paragraph.insertBefore(container, node)
-
-                        const subNode = document.createElement("span")
-                        subNode.textContent = regex.substr
-                        subNode.className = "sub"
-                        subNode.style.cssText = "background-color:" + regex.color + ";"
-                        container.appendChild(subNode)
-
-                        const blankNode = document.createElement("span")
-                        blankNode.textContent = match[1]
-                        blankNode.className = "blank"
-                        container.appendChild(blankNode)
+                        blank = buildBlank(regex, match[1])
+                        blank.addEventListener("click", storeCorrect)
+                        paragraph.insertBefore(blank, node)
                     }
                 }
             } while (node = node.nextSibling);
