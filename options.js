@@ -30,9 +30,9 @@ newButton.addEventListener("click", function() {
     addRow(true, "", "", "")
 });
 
-var defaultButton = document.getElementById("defaults-button");
-defaultButton.addEventListener("click", function() {
-    addRow(true, '(d[ei][rmnse])', 'A', "#ffa502")
+var germanButton = document.getElementById("german-button");
+germanButton.addEventListener("click", function() {
+    addRow(true, '(de[rnms]|die|das)', 'A', "#ffa502")
     addRow(true, '(ein[e]*[nsmr]*)', 'D', "#eccc68")
     addRow(true, '(beim?|a[nm]|auf|i[nm]|vo[nm]|über|zu[mr]?|nach|aus|durch|um)', 'P', "#ff7f50")
 });
