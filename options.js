@@ -18,7 +18,7 @@ function addRow(isActive, rxstr, substr, color, score) {
 
 function createRow(isActive, rxstr, substr, color, score) {
     var row = document.createElement("tr");
-    row.innerHTML = `<td class=\"checkbox-cell\"><input type=\"checkbox\" class=\"form-check\" ${ isActive ? 'checked' : '' }></td>
+    row.innerHTML = `<td class=\"blank-checkbox-cell\"><input type=\"checkbox\" class=\"blank-form-check\" ${ isActive ? 'checked' : '' }></td>
                      <td><input type=\"text\" class=\"form-control\" value=\"${rxstr}\"></td>
                      <td><input type=\"text\" class=\"form-control\" value=\"${substr}\"></td>
                      <td><input type=\"text\" class=\"form-control\" value=\"${color}\"></td>
@@ -26,12 +26,12 @@ function createRow(isActive, rxstr, substr, color, score) {
     return row
 }
 
-var newButton = document.getElementById("new-button");
+var newButton = document.getElementById("newButton");
 newButton.addEventListener("click", function() {
     addRow(true, "", "", "", "", 0)
 });
 
-var germanButton = document.getElementById("german-button");
+var germanButton = document.getElementById("germanButton");
 germanButton.addEventListener("click", function() {
     addRow(true, '(de[rnms]|die|das)', 'A', "#ffa502")
     addRow(true, '(ein[e]*[nsmr]*)', 'D', "#eccc68")
@@ -59,13 +59,13 @@ function saveOptions() {
     });
 }
 
-var saveButton = document.getElementById("save-button");
+var saveButton = document.getElementById("saveButton");
 saveButton.addEventListener("click", saveOptions);
 
 function restoreOptions() {
     var rows = document.querySelectorAll("table > tr");
     rows.forEach(row => {
-        if (row.className != 'header') {
+        if (row.className != 'blank-header') {
             row.parent.removeChild(row)
         }
     })
@@ -81,5 +81,5 @@ function restoreOptions() {
 }
 document.addEventListener('DOMContentLoaded', restoreOptions);
 
-var resetButton = document.getElementById("reset-button");
+var resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", function(){browser.storage.local.set({"scores": {}})});

@@ -1,4 +1,4 @@
-.sub {
+.blank-sub {
     grid-column: 1;
     grid-row: 1;
     text-align: left;
@@ -15,7 +15,7 @@
     background-color: transparent;
 }
 
-.blank {
+.blank-blank {
     color: transparent;
     text-align: center;
     grid-column: 1;
@@ -24,34 +24,34 @@
     min-width: 5em;
 }
 
-.blank-container:hover .blank {
+.blank-container:hover .blank-blank {
     cursor: none;
     color: inherit !important;
 }
 
-span.answered .blank {
+span.blank-answered .blank-blank {
     color: inherit !important;
 }
 
-span.correct .sub {
+span.blank-correct .blank-sub {
     background-color: #26de81 !important;
 }
 
-span.wrong .sub {
+span.blank-wrong .blank-sub {
     background-color: #fc5c65 !important;
 }
 
-.form-check {
+.blank-form-check {
     margin: auto;
     zoom: 1.5;
     transform: scale(1.5);
 }
 
-.checkbox-cell {
+.blank-checkbox-cell {
     vertical-align: middle !important;
 }
 
-.score {
+.blank-score {
     background-color: #fd9644;
     text-align: center;
     text-weight: 500;
@@ -60,7 +60,8 @@ span.wrong .sub {
     background: -webkit-linear-gradient(to top right, #8a2387, #e94057, #f27121); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top right, #8a2387, #e94057, #f27121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.sticky {
+
+.blank-sticky {
     position: fixed;
     top: 0;
     width: 100%

@@ -13,27 +13,27 @@ function editScore(key, edit=1) {
 function storeCorrect(event) {
     const elem = event.target.parentElement
 
-    const scoreKey = elem.children[1].className.match("substr=(.*?)(?=\\s|$)")[1]
+    const scoreKey = elem.children[1].className.match("blank-substr=(.*?)(?=\\s|$)")[1]
 
     var edit = 0
-    if (elem.className.includes("correct")) {
+    if (elem.className.includes("blank-correct")) {
         elem.className = elem.className.replace(' correct', '')
-        elem.className += " wrong answered"
+        elem.className += " blank-wrong blank-answered"
         edit = -1
     } else {
-        elem.className = elem.className.replace(' wrong', '')
-        elem.className += " correct answered"
+        elem.className = elem.className.replace(' blank-wrong', '')
+        elem.className += " blank-correct blank-answered"
         edit = 1
     }
     editScore(scoreKey, edit)
 }
 
 function updateScoreHeader() {
-    var scoreHeader = document.getElementById("blank_scoreHeader")
+    var scoreHeader = document.getElementById("blankScoreHeader")
     if (scoreHeader == null) {
         scoreHeader = document.createElement("div")
-        scoreHeader.className = "score sticky"
-        scoreHeader.id = "blank_scoreHeader"
+        scoreHeader.className = "blank-score blank-sticky"
+        scoreHeader.id = "blankScoreHeader"
         document.body.appendChild(scoreHeader)
     }
 
@@ -41,7 +41,7 @@ function updateScoreHeader() {
     browser.storage.local.get("regexes").then(results => {
         results["regexes"].forEach(regex => {
             const blank = buildBlank(regex, regex.score)
-            blank.className += " correct answered"
+            blank.className += " blank-correct blank-answered"
             scoreHeader.appendChild(blank)
         })
     })
@@ -54,12 +54,12 @@ function buildBlank(regex, text) {
 
     const subNode = document.createElement("span")
     subNode.textContent = regex.substr
-    subNode.className = "sub"
+    subNode.className = "blank-sub"
     subNode.style.cssText = "background-color:" + regex.color + ";"
     container.appendChild(subNode)
 
     const blankNode = document.createElement("span")
-    blankNode.className = `blank substr=${regex.substr}`
+    blankNode.className = `blank-blank blank-substr=${regex.substr}`
     blankNode.textContent = text
     container.appendChild(blankNode)
     return container
