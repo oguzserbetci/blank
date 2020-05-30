@@ -1,33 +1,31 @@
-function editScore(scores, key, edit=1) {
-    score = typeof scores[key] != 'undefined' ? scores[key] : 0
-    scores[key] = score + edit
-    return scores
+function editScore(key, edit=1) {
+    browser.storage.local.get("regexes").then(res => {
+        var regexes = res['regexes'].map(regex => {
+            if (regex.substr === key) {
+                regex.score += edit
+            }
+            return regex
+        })
+        browser.storage.local.set({'regexes': regexes});
+    })
 }
 
 function storeCorrect(event) {
     const elem = event.target.parentElement
 
     const scoreKey = elem.children[1].className.match("substr=(.*?)(?=\\s|$)")[1]
-    browser.storage.local.get("scores").then(res => {
-        var scores = res["scores"]
-        if (res['scores'] == undefined) {
-            scores = {}
-        }
 
-        var edit = 0
-        if (elem.className.includes("correct")) {
-            elem.className = elem.className.replace(' correct', '')
-            elem.className += " wrong answered"
-            edit = -1
-        } else {
-            elem.className = elem.className.replace(' wrong', '')
-            elem.className += " correct answered"
-            edit = 1
-        }
-
-        var newScores = editScore(scores, scoreKey, edit)
-        browser.storage.local.set({"scores": newScores});
-    })
+    var edit = 0
+    if (elem.className.includes("correct")) {
+        elem.className = elem.className.replace(' correct', '')
+        elem.className += " wrong answered"
+        edit = -1
+    } else {
+        elem.className = elem.className.replace(' wrong', '')
+        elem.className += " correct answered"
+        edit = 1
+    }
+    editScore(scoreKey, edit)
 }
 
 function updateScoreHeader() {
@@ -39,13 +37,13 @@ function updateScoreHeader() {
         document.body.appendChild(scoreHeader)
     }
 
-    browser.storage.local.get("scores").then(results => {
-        scoreHeader.innerHTML = ""
-        for (var property in results["scores"]) {
-            const blank = buildBlank({'substr': property, 'color': 'red'}, results["scores"][property])
+    scoreHeader.textContent = ""
+    browser.storage.local.get("regexes").then(results => {
+        results["regexes"].forEach(regex => {
+            const blank = buildBlank(regex, regex.score)
             blank.className += " correct answered"
             scoreHeader.appendChild(blank)
-        }
+        })
     })
 }
 browser.storage.onChanged.addListener(updateScoreHeader)

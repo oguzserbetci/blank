@@ -1,6 +1,6 @@
-function addRow(isActive, rxstr, substr, color) {
-    var table = document.getElementById("table");
-    var row = createRow(isActive, rxstr, substr, color);
+function addRow(isActive, rxstr, substr, color, score) {
+    var table = document.getElementById("regexTable");
+    var row = createRow(isActive, rxstr, substr, color, score);
     var removeButton = document.createElement("button");
     removeButton.innerText = "REMOVE";
     removeButton.type = "button"
@@ -16,18 +16,19 @@ function addRow(isActive, rxstr, substr, color) {
     saveOptions()
 }
 
-function createRow(isActive, rxstr, substr, color) {
+function createRow(isActive, rxstr, substr, color, score) {
     var row = document.createElement("tr");
     row.innerHTML = `<td class=\"checkbox-cell\"><input type=\"checkbox\" class=\"form-check\" ${ isActive ? 'checked' : '' }></td>
                      <td><input type=\"text\" class=\"form-control\" value=\"${rxstr}\"></td>
                      <td><input type=\"text\" class=\"form-control\" value=\"${substr}\"></td>
-                     <td><input type=\"text\" class=\"form-control\" value=\"${color}\"></td>`
+                     <td><input type=\"text\" class=\"form-control\" value=\"${color}\"></td>
+                     <td><p>${score}</p></td>`
     return row
 }
 
 var newButton = document.getElementById("new-button");
 newButton.addEventListener("click", function() {
-    addRow(true, "", "", "")
+    addRow(true, "", "", "", "", 0)
 });
 
 var germanButton = document.getElementById("german-button");
@@ -48,7 +49,8 @@ function saveOptions() {
             "rxstr": inputs[1].value,
             "rx": new RegExp('\\b' + inputs[1].value + '(?=\\s|$)', 'igm'),
             "substr": inputs[2].value,
-            "color": inputs[3].value
+            "color": inputs[3].value,
+            "score": 0
         }
         options.push(option)
     }
@@ -61,54 +63,23 @@ var saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", saveOptions);
 
 function restoreOptions() {
+    var rows = document.querySelectorAll("table > tr");
+    rows.forEach(row => {
+        if (row.className != 'header') {
+            row.parent.removeChild(row)
+        }
+    })
     browser.storage.local.get("regexes").then(res => {
         for (var i = 0, l = res["regexes"].length; i < l; i++) {
             addRow(res["regexes"][i].isActive,
                    res["regexes"][i].rxstr,
                    res["regexes"][i].substr,
-                   res["regexes"][i].color)
+                   res["regexes"][i].color,
+                   res["regexes"][i].score)
         }
     });
 }
-
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.addEventListener('DOMContentLoaded', updateScoreHeader);
 
 var resetButton = document.getElementById("reset-button");
 resetButton.addEventListener("click", function(){browser.storage.local.set({"scores": {}})});
-
-function buildBlank(regex, text) {
-    const container = document.createElement("span")
-    container.className = "blank-container"
-
-    const subNode = document.createElement("span")
-    subNode.textContent = regex.substr
-    subNode.className = "sub"
-    subNode.style.cssText = "background-color:" + regex.color + ";"
-    container.appendChild(subNode)
-
-    const blankNode = document.createElement("span")
-    blankNode.className = `blank substr=${regex.substr}`
-    blankNode.textContent = text
-    container.appendChild(blankNode)
-    return container
-}
-function updateScoreHeader() {
-    var scoreHeader = document.getElementById("blank_scoreHeader")
-    if (scoreHeader == null) {
-        scoreHeader = document.createElement("div")
-        scoreHeader.className = "score sticky"
-        scoreHeader.id = "blank_scoreHeader"
-        document.body.appendChild(scoreHeader)
-    }
-
-    browser.storage.local.get("scores").then(results => {
-        scoreHeader.innerHTML = ""
-        for (var property in results["scores"]) {
-            const blank = buildBlank({'substr': property, 'color': 'red'}, results["scores"][property])
-            blank.className += " correct answered"
-            scoreHeader.appendChild(blank)
-        }
-    })
-}
-browser.storage.onChanged.addListener(updateScoreHeader)
