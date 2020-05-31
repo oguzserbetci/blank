@@ -19,7 +19,7 @@ function storeCorrect(event) {
     if (elem.className.includes("blank-correct")) {
         elem.className = elem.className.replace(' correct', '')
         elem.className += " blank-wrong blank-answered"
-        edit = -1
+        edit = -2
     } else {
         elem.className = elem.className.replace(' blank-wrong', '')
         elem.className += " blank-correct blank-answered"
