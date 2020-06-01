@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "blank",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Creates exercises for your reading online!",
     "options_ui": {
         "page": "options.html"
