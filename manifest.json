@@ -6,17 +6,12 @@
     "options_ui": {
         "page": "options.html"
     },
-    "content_scripts": [{
-        "css": ["styles.css"],
-        "js": ["content.js"],
-        "matches": ["*://*/*"]
-    }],
     "background": {
         "scripts": ["background.js"]
     },
     "permissions": [
         "storage",
-        "tabs"
+        "activeTab"
     ],
     "browser_action": {
         "default_icon":  "wink.png"

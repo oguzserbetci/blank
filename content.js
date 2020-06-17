@@ -93,4 +93,5 @@ function blankizePage() {
         }
     })
 }
-browser.runtime.onMessage.addListener(blankizePage);
+
+blankizePage()

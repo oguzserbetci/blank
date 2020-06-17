@@ -7,8 +7,9 @@ browser.browserAction.onClicked.addListener(() => {
 
 function sendMessageToTabs(tabs) {
   for (let tab of tabs) {
-    browser.tabs.sendMessage(
-      tab.id, {}
+    browser.tabs.executeScript(
+      {file: 'content.js'}
     );
+    browser.tabs.insertCSS({file: "styles.css"});
   }
 }
