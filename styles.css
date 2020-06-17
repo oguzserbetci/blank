@@ -61,8 +61,17 @@ span.blank-wrong .blank-sub {
     background: linear-gradient(to top right, #8a2387, #e94057, #f27121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.blank-score .blank-container {
+    line-height: 1.5em;
+    display: grid;
+    padding: 0.1em;
+}
+
 .blank-sticky {
     position: fixed;
-    top: 0;
+    top: 50%;
     width: 100%
+    z-index:1000;
+    margin: 1em;
+    border-radius: 7px;
 }
