@@ -19,9 +19,9 @@ function addRow(isActive, rxstr, substr, color, score) {
 function createRow(isActive, rxstr, substr, color, score) {
     var row = document.createElement("tr");
     row.innerHTML = `<td class=\"blank-checkbox-cell\"><input type=\"checkbox\" class=\"blank-form-check\" ${ isActive ? 'checked' : '' }></td>
-                     <td><input type=\"text\" class=\"form-control\" value=\"${rxstr}\"></td>
-                     <td><input type=\"text\" class=\"form-control\" value=\"${substr}\"></td>
-                     <td><input type=\"text\" class=\"form-control\" value=\"${color}\"></td>
+                     <td><input size=50 type=\"text\" class=\"form-control\" value=\"${rxstr}\"></td>
+                     <td><input size=3 type=\"text\" class=\"form-control\" value=\"${substr}\"></td>
+                     <td><input size=15 type=\"text\" class=\"form-control\" value=\"${color}\"></td>
                      <td><p>${score}</p></td>`
     return row
 }
