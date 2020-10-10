@@ -81,3 +81,10 @@ span.blank-wrong .blank-sub {
 .blank-score p {
     margin: 0;
 }
+
+#blank-close-button {
+    border: 0;
+    padding: 0;
+    color: white;
+    background-color: transparent;
+}

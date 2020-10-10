@@ -46,6 +46,12 @@ function updateScoreHeader() {
             container.appendChild(blank)
             scoreHeader.appendChild(container)
         })
+
+        const clearButton = document.createElement("button")
+        clearButton.textContent = "close"
+        clearButton.id = "blank-close-button"
+        clearButton.addEventListener("click", removeBlank)
+        scoreHeader.appendChild(clearButton)
     })
 }
 browser.storage.onChanged.addListener(updateScoreHeader)
@@ -94,6 +100,15 @@ function blankizePage() {
             } while (node = node.nextSibling);
         }
     })
+}
+
+function removeBlank() {
+    let existingBlanks = document.querySelectorAll(".blank-container");
+    for (let blank of existingBlanks) {
+        blank.parentNode.replaceChild(document.createTextNode(blank.querySelector(".blank-blank").textContent), blank);
+    }
+    const score = document.querySelector(".blank-score")
+    score.parentNode.removeChild(score)
 }
 
 blankizePage()
