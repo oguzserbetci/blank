@@ -40,9 +40,11 @@ function updateScoreHeader() {
     scoreHeader.textContent = ""
     browser.storage.local.get("regexes").then(results => {
         results["regexes"].forEach(regex => {
+            const container = document.createElement("p")
             const blank = buildBlank(regex, regex.score)
             blank.className += " blank-correct blank-answered"
-            scoreHeader.appendChild(blank)
+            container.appendChild(blank)
+            scoreHeader.appendChild(container)
         })
     })
 }
