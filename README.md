@@ -7,7 +7,7 @@ Just try to guess them while reading on web while this extension tracks your sco
 ![](screenshot.png)
 
 ## Installation
-Download `blank-*.xpi` from Releases and add it to firefox as a local extension.
+Download `blank-*.xpi` from Releases and add it to Firefox as a local extension.
 
 ## Setup
 Go to extension preferences to add patterns to replace with blanks.
@@ -25,6 +25,7 @@ You can activate and deactivate patterns using the checkbox in the beginning of 
 ## Usage
 Click the plugin icon on the address bar to activate blanks on the currently open tab.
 Now each paragraph has a randomly assigned blank type so that you do not get too distracted.
+While reading, guess the blanked out parts, check your guess by hovering over the blank and mark it correct with a single click or incorrect with an additional second click.
 
 > If you want more blanks, just click the icon again!
 
