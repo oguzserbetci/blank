@@ -32,3 +32,12 @@ On the bottom left corner you can track your score or close the extension for th
 
 ## Compatibility 
 Only works with Firefox. I am open to PRs that would make it work on other browsers :)
+
+## Development
+Install web-ext npm package for simple building and signing of web extension for Firefox:
+
+```sh
+npm install -g web-ext
+web-ext build --overwrite-dest
+web-ext sign --api-key=<KEY FROM FIREFOX> --api-secret=<SECRET FROM FIREFOX>
+```
