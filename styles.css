@@ -52,7 +52,7 @@ span.blank-wrong .blank-sub {
     vertical-align: middle !important;
 }
 
-.blank-score {
+#blankScoreBoard {
     font-family: monospace;
     font-size: 16pt;
     background-color: #fd9644;
@@ -62,15 +62,7 @@ span.blank-wrong .blank-sub {
     background: #f27121; /* fallback for old browsers */
     background: -webkit-linear-gradient(to top right, #8a2387, #e94057, #f27121); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top right, #8a2387, #e94057, #f27121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.blank-score .blank-container {
-    line-height: 1.5em;
-    display: grid;
-    padding: 0.1em;
-}
-
-.blank-sticky {
+    /* sticky */
     position: fixed;
     bottom: 1em;
     left: 1em;
@@ -78,11 +70,17 @@ span.blank-wrong .blank-sub {
     border-radius: 7px;
 }
 
-.blank-score p {
+#blankScoreBoard .blank-container {
+    line-height: 1.5em;
+    display: grid;
+    padding: 0.1em;
+}
+
+#blankScoreBoard p {
     margin: 0;
 }
 
-#blank-close-button {
+#blankCloseButton {
     border: 0;
     padding: 0;
     color: white;

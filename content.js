@@ -28,33 +28,33 @@ function storeCorrect(event) {
     editScore(scoreKey, edit)
 }
 
-function updateScoreHeader() {
-    var scoreHeader = document.getElementById("blankScoreHeader")
-    if (scoreHeader == null) {
-        scoreHeader = document.createElement("div")
-        scoreHeader.className = "blank-score blank-sticky"
-        scoreHeader.id = "blankScoreHeader"
-        document.body.appendChild(scoreHeader)
+function updateScoreBoard() {
+    var scoreBoard = document.getElementById("blankScoreBoard")
+    if (scoreBoard != null) {
+        scoreBoard.parentNode.removeChild(scoreBoard)
     }
 
-    scoreHeader.textContent = ""
+    scoreBoard = document.createElement("div")
+    scoreBoard.id = "blankScoreBoard"
+    document.body.appendChild(scoreBoard)
+
     browser.storage.local.get("regexes").then(results => {
         results["regexes"].forEach(regex => {
             const container = document.createElement("p")
             const blank = buildBlank(regex, regex.score)
             blank.className += " blank-correct blank-answered"
             container.appendChild(blank)
-            scoreHeader.appendChild(container)
+            scoreBoard.appendChild(container)
         })
 
         const clearButton = document.createElement("button")
         clearButton.textContent = "close"
-        clearButton.id = "blank-close-button"
+        clearButton.id = "blankCloseButton"
         clearButton.addEventListener("click", removeBlank)
-        scoreHeader.appendChild(clearButton)
+        scoreBoard.appendChild(clearButton)
     })
 }
-browser.storage.onChanged.addListener(updateScoreHeader)
+browser.storage.onChanged.addListener(updateScoreBoard)
 
 function buildBlank(regex, text) {
     const container = document.createElement("span")
@@ -74,7 +74,7 @@ function buildBlank(regex, text) {
 }
 
 function blankizePage() {
-    updateScoreHeader()
+    updateScoreBoard()
 
     browser.storage.local.get("regexes").then(results => {
         const regexes = results["regexes"].filter(regex => regex.isActive)
@@ -107,7 +107,7 @@ function removeBlank() {
     for (let blank of existingBlanks) {
         blank.parentNode.replaceChild(document.createTextNode(blank.querySelector(".blank-blank").textContent), blank);
     }
-    const score = document.querySelector(".blank-score")
+    const score = document.querySelector("#blankScoreBoard")
     score.parentNode.removeChild(score)
 }
 
