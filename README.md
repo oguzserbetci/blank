@@ -7,8 +7,7 @@ Just try to guess them while reading on web while this extension tracks your sco
 ![](screenshot.png)
 
 ## Installation
-Download ``blank.zip` and add it to firefox as a local add-on.
-
+Download `blank-*.xpi` from Releases and add it to firefox as a local extension.
 
 ## Setup
 Go to extension preferences to add patterns to replace with blanks.
@@ -30,3 +29,6 @@ Now each paragraph has a randomly assigned blank type so that you do not get too
 > If you want more blanks, just click the icon again!
 
 On the bottom left corner you can track your score or close the extension for the tab.
+
+## Compatibility 
+Only works with Firefox. I am open to PRs that would make it work on other browsers :)
